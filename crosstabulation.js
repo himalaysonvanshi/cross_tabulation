@@ -1,10 +1,17 @@
+/**
+ * find cross tabulation on given data for given columns
+ * @param {data} csv file data
+ * @param {col1} column 1
+ * @param {col2} column 2
+ * @returns {object} result object containing map of result and row and column array
+ */
 var findCrossTabulation = function(data, col1, col2) {
 	
 	var mapTabulation = {};
 	var mapColumn = {};
 	var mapRow = {};
 
-
+	// loop through data and create a map for cross tabulation
 	for(var i = 0; i < data.length; i++) {
 		var row = data[i];
 		if(!mapTabulation[row[col1]]) {
@@ -26,12 +33,16 @@ var findCrossTabulation = function(data, col1, col2) {
 	};
 };
 
+/**
+ * on load function, initialize datatable to show csv data
+ */
 var OnLoad = function() {
 	var col = [];
 	for(var i in csvHeader) {
 		col.push({"title" : csvHeader[i]});
 	}
 
+	// initializing
 	$('#csvDataTable').dataTable(
     {
         data: csvData,
@@ -46,8 +57,14 @@ var OnLoad = function() {
     });
 };
 
-var table = null;
+/**
+ * cross tabulation data table, needed to destroy before reinitializing
+ */
+var CTTable = null;
 
+/**
+ * on show cross tabulation clicked, calculate and show data of cross tabulation of selected columns
+ */
 var ShowCrossTabulation = function() {
 	var col1 = $("#CTCol1 option:selected").val();
 	var col2 = $("#CTCol2 option:selected").val();
@@ -57,6 +74,7 @@ var ShowCrossTabulation = function() {
 	var arrRow = res.row;
 	var mapData = res.data;
 
+	// create drawable array for datatable from map
 	var arrData = [];
 	for(var i = 0; i < arrRow.length; i++) {
 		arrData[i] = [arrRow[i]];
@@ -75,16 +93,14 @@ var ShowCrossTabulation = function() {
 		col.push({"title" : arrColumn[i]});
 	}
 
-	console.log(arrData);
-	console.log(arrColumn);
-	console.log(col);
-
-	if(table) {
-		table.fnDestroy();
+	// Destroy CTTable before reinitializing
+	if(CTTable) {
+		CTTable.fnDestroy();
 		$('#CTResultTable').empty();
 	}
 
-	table = $('#CTResultTable').dataTable(
+	// initialize datatable for cross tabulation result
+	CTTable = $('#CTResultTable').dataTable(
     {
     	data: arrData,
         columns: col,
