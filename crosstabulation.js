@@ -46,6 +46,8 @@ var OnLoad = function() {
     });
 };
 
+var table = null;
+
 var ShowCrossTabulation = function() {
 	var col1 = $("#CTCol1 option:selected").val();
 	var col2 = $("#CTCol2 option:selected").val();
@@ -77,11 +79,14 @@ var ShowCrossTabulation = function() {
 	console.log(arrColumn);
 	console.log(col);
 
+	if(table) {
+		table.fnDestroy();
+		$('#CTResultTable').empty();
+	}
 
-	$('#CTResultTable').dataTable(
+	table = $('#CTResultTable').dataTable(
     {
-    	"bDestroy": true,
-        data: arrData,
+    	data: arrData,
         columns: col,
         "pagingType": "full",
         "aLengthMenu": [
