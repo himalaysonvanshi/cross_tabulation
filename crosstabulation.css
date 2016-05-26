@@ -1,0 +1,16 @@
+.row {
+	margin-top : 20px;
+}
+.alert {
+	margin-top : 20px;	
+}
+[class*="col-"] {
+    background-clip: padding-box;
+    border-bottom: 10px solid transparent;
+}
+table {
+	width: 100%;
+}
+#CTResult {
+	display: none;
+}
