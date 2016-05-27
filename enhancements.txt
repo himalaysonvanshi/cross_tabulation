@@ -1,0 +1,14 @@
+The calcuation of cross tabulation is on webpage only. 
+That works for small to medium size of csv file. 
+
+For large csv files only,
+	- We can fetch only some rows of csv data to show to user with the option "See more".
+	- We move the cross tabulation calcuation part on server side and send ajax request to server to get the result.
+
+	pros :-
+		- We are never loading the full file ever in memory. So memory problems can be avoided on server side.
+		- We are never giving full data to webpage. So that we can prevent webpage crashing.
+	
+	cons :- 
+		- We are requesting everything on server. So we have to wait for server to respond for every query.
+	

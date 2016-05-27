@@ -1,0 +1,14 @@
+I have used bootstrap for creating responsive page.
+
+I have passed the csv data to the webpage. 
+So that for a fair amount of size of csv file it would work as fast it can get.
+The logic of cross tabulation is also written in the javascript.
+
+(see enhancements.txt for large csv file handling)
+
+Pros :-
+	- The benefit of having loaded the data on the webpage is removing lag becouse of network overhead.
+	- It now would not need to send ajax requests to server to get cross tabulation calculation or showing the csv data into table. 
+	
+Cons :- 
+	- This would not work if the csv file size is too large.
